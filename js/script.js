@@ -13,13 +13,14 @@ console.log(Person.prototype);
 Person.prototype.calcage = function () {
   console.log(this.birthYear - 2024, this.firstName);
 };
+Person.prototype.species = "Homo sapien";
 moses.calcage();
 mwangi.calcage();
 
 console.log(moses.__proto__ === Person.prototype);
 console.log(Person.prototype.isPrototypeOf(moses));
 console.log(moses.hasOwnProperty("name"));
-Person.prototype.species = "Homo sapien";
+
 console.log(moses.hasOwnProperty("firstName"));
 console.log(moses.hasOwnProperty("name"));
 
@@ -38,3 +39,6 @@ Array.prototype.unique = function () {
   return [...new Set(this)];
 };
 console.log(arr.unique());
+
+const h1 = document.querySelector("h1");
+console.dir(h1);
