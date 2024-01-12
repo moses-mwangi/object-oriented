@@ -236,6 +236,8 @@ class studentCl extends PersonCl {
 const martha = new studentCl("Martha mwangi", 2006, "computer science");
 console.log(martha);*/
 
+////////////////////// class inheritance with a object.create //////////////
+/*
 const PersonProto = {
   calcAge() {
     console.log(2037 - this.birthYear);
@@ -248,4 +250,71 @@ const PersonProto = {
 };
 
 const steve = Object.create(PersonProto);
-console.log(steve);
+const studentProto = Object.create(PersonProto);
+
+studentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+studentProto.introduce = function () {
+  console.log(2004 - this.birthYear);
+};
+const jay = Object.create(studentProto);
+jay.init("moses", 2002, "computer");
+
+jay.introduce();
+jay.calcAge();*/
+
+class Accounts {
+  //public
+  locale = navigator.language;
+  //private
+  #movement = [];
+  #pin;
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.currency = currency;
+    this.#pin = pin;
+    // this.locale = navigator.language;
+    //protected
+    // this._movement = [];
+  }
+
+  //////// public interface ///////
+  getMovement() {
+    return this.#movement;
+  }
+
+  deposit(val) {
+    this.#movement.push(val);
+    return this;
+  }
+  withdrawal(val) {
+    this.deposit(-val);
+    return this;
+  }
+  _loanAproval(val) {
+    return true;
+    return this;
+  }
+  requestLoan(val) {
+    if (this._loanAproval(val)) {
+      this.deposit(val);
+      console.log("LOAN APPROVAL");
+      return this;
+    }
+  }
+}
+
+const moses = new Accounts("moses", "EUR", 1111);
+
+// moses.movement.push(123, 900);
+moses.deposit(540);
+moses.withdrawal(600);
+moses.requestLoan(1000);
+console.log(moses);
+// console.log(moses.#movement);
+// console.log(moses.#pin);
+moses.deposit(1000).withdrawal(300).deposit(567).deposit(650).requestLoan(150);
+console.log(moses);
